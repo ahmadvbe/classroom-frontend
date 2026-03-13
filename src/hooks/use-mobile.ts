@@ -1,4 +1,4 @@
-import * as React from "react";
+import * as React from "react"; //1:59:40 a hook made to amke sites responsive to mobile sizes
 
 const MOBILE_BREAKPOINT = 768;
 
