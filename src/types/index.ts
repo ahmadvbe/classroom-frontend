@@ -1,4 +1,4 @@
-export type Subject = {
+export type Subject = { //2:26:49
   id: number;
   name: string;
   code: string;

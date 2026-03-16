@@ -26,11 +26,11 @@ import SubjectsCreate from "./pages/subjects/create";
 import SubjectsShow from "./pages/subjects/show";
 import Dashboard from "./pages/dashboard";
 
-import { dataProvider } from "../../../../jsm-files/classroom-main/src/providers/data.ts";
+import { dataProvider } from "../src/providers/data.ts";
 import ClassesList from "./pages/classes/list";
 import ClassesCreate from "./pages/classes/create";
 import ClassesShow from "./pages/classes/show";
-import { authProvider } from "../../../../jsm-files/classroom-main/src/providers/auth.ts";
+// import { authProvider } from "../../../../jsm-files/classroom-main/src/providers/auth.ts";
 import { Login } from "./pages/login";
 import { Register } from "./pages/register";
 import DepartmentsList from "./pages/departments/list";
@@ -49,8 +49,8 @@ function App() {
         <ThemeProvider>
           <DevtoolsProvider>
             <Refine
-              dataProvider={dataProvider}
-              authProvider={authProvider}
+              dataProvider={dataProvider} //2:45:55 @ app.tsx we fill the data provider field-coming from data.ts
+              //authProvider={authProvider}
               notificationProvider={useNotificationProvider()}
               routerProvider={routerProvider}
               options={{
@@ -121,7 +121,7 @@ function App() {
                 //   },
                 // },
               ]}
-            >
+>
               <Routes>
                 {/*<Route*/}
                 {/*  element={*/}
