@@ -4,6 +4,12 @@ import { createDataProvider, CreateDataProviderOptions } from "@refinedev/rest";
 import { CreateResponse, GetOneResponse, ListResponse } from "@/types";
 import { BACKEND_BASE_URL } from "@/constants";
 
+
+
+//4:00:40 Coderabbit suggestion
+if(!BACKEND_BASE_URL){
+  throw new Error("BE is not configured, Please set the VITE_BACKEND_BASE_URL in ur .env file")
+}
 //1st define the options needed 3:50:35
 const options: CreateDataProviderOptions = {
   getList: { //define the option specifically fpr get list
@@ -64,7 +70,10 @@ const options: CreateDataProviderOptions = {
 
     //3:51:32
     mapResponse: async (response) => {
-      const payload: ListResponse = await response.json(); //get access to the payload we re passing over
+      //4:00:20 Code rabbit fix : adding .clone()
+      const payload: ListResponse = await response.clone().json(); //get access to the payload we re passing over
+
+
       return payload.data ?? [];//3:51:56
     },
 
