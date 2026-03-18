@@ -26,11 +26,11 @@ import SubjectsCreate from "./pages/subjects/create";
 import SubjectsShow from "./pages/subjects/show";
 import Dashboard from "./pages/dashboard";
 
-import { dataProvider } from "../../../../jsm-files/classroom-main/src/providers/data.ts";
+import { dataProvider } from "../src/providers/data.ts";
 import ClassesList from "./pages/classes/list";
 import ClassesCreate from "./pages/classes/create";
 import ClassesShow from "./pages/classes/show";
-import { authProvider } from "../../../../jsm-files/classroom-main/src/providers/auth.ts";
+import { authProvider } from "../src/providers/auth.ts";
 import { Login } from "./pages/login";
 import { Register } from "./pages/register";
 import DepartmentsList from "./pages/departments/list";
@@ -50,8 +50,8 @@ function App() {
           <DevtoolsProvider>
             <Refine
               dataProvider={dataProvider}
-              authProvider={authProvider}
-              notificationProvider={useNotificationProvider()}
+              // authProvider={authProvider}
+              //notificationProvider={useNotificationProvider()}
               routerProvider={routerProvider}
               options={{
                 syncWithLocation: true,
@@ -188,7 +188,7 @@ function App() {
                 </Route>
               </Routes>
 
-              <Toaster />
+              {/*<Toaster />*/}
               <RefineKbar />
               <UnsavedChangesNotifier />
               <DocumentTitleHandler />

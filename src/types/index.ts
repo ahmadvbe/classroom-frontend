@@ -7,6 +7,8 @@ export type Subject = {
   createdAt?: string;
 };
 
+//# 3:48:00 code out a lot of of different types - we hve to keep track of the departments, responses
+//and evg else that needs types in our app
 export type ListResponse<T = unknown> = {
   data?: T[];
   pagination?: {
