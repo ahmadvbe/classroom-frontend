@@ -1,14 +1,22 @@
 import * as z from "zod";
 
+// 4:16:15 create src/lib/schema.ts
+//define ZOD schema to validate form inputs and make
+// sure the user is submitting the right form
+
+//5 schemas are defined :
+
 export const facultySchema = z.object({
-  name: z.string().min(2, "Name must be at least 2 characters"),
+  //z is coming from zod
+  name: z.string().min(2,
+                        "Name must be at least 2 characters"), //msg if cond is nt met
   email: z.string().email("Invalid email address"),
-  role: z.enum(["admin", "teacher", "student"], {
+  role: z.enum(["admin", "teacher", "student"], { //enum = one of the predefined options
     required_error: "Please select a role",
   }),
-  department: z.string(),
+  department: z.string(), //4:17:30
   image: z.string().optional(),
-  imageCldPubId: z.string().optional(),
+  imageCldPubId: z.string().optional(), //where it will b published
 });
 
 export const subjectSchema = z.object({

@@ -4,6 +4,7 @@ import { ColumnDef } from "@tanstack/react-table";
 import { useTable } from "@refinedev/react-table";
 import { useList } from "@refinedev/core";
 
+//src/pages/classes/list.tsx =>will render a list of all the classes
 import {
   Select,
   SelectContent,
