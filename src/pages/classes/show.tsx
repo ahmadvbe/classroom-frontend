@@ -131,28 +131,28 @@ const ClassesShow = () => {
     <ShowView className="class-view class-show space-y-6">
       <ShowViewHeader resource="classes" title="Class Details" />
 
-      <div className="banner">
-        {classDetails.bannerUrl ? (
-          classDetails.bannerUrl.includes("res.cloudinary.com") &&
-          classDetails.bannerCldPubId ? (
-            <AdvancedImage
-              cldImg={bannerPhoto(
-                classDetails.bannerCldPubId ?? "",
-                classDetails.name
-              )}
-              alt="Class Banner"
-            />
-          ) : (
-            <img
-              src={classDetails.bannerUrl}
-              alt={classDetails.name}
-              loading="lazy"
-            />
-          )
-        ) : (
-          <div className="placeholder" />
-        )}
-      </div>
+      {/*<div className="banner">*/}
+      {/*  {classDetails.bannerUrl ? (*/}
+      {/*    classDetails.bannerUrl.includes("res.cloudinary.com") &&*/}
+      {/*    classDetails.bannerCldPubId ? (*/}
+      {/*      <AdvancedImage*/}
+      {/*        cldImg={bannerPhoto(*/}
+      {/*          classDetails.bannerCldPubId ?? "",*/}
+      {/*          classDetails.name*/}
+      {/*        )}*/}
+      {/*        alt="Class Banner"*/}
+      {/*      />*/}
+      {/*    ) : (*/}
+      {/*      <img*/}
+      {/*        src={classDetails.bannerUrl}*/}
+      {/*        alt={classDetails.name}*/}
+      {/*        loading="lazy"*/}
+      {/*      />*/}
+      {/*    )*/}
+      {/*  ) : (*/}
+      {/*    <div className="placeholder" />*/}
+      {/*  )}*/}
+      {/*</div>*/}
 
       <Card className="details-card">
         {/* Class Details */}

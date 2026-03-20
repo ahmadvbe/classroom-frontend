@@ -20,16 +20,21 @@ import {
   Home,
   Users,
 } from "lucide-react";
+
 import SubjectsList from "./pages/subjects/list";
 import { Layout } from "../../../../jsm-files/classroom-main/src/components/refine-ui/layout/layout.tsx";
 import SubjectsCreate from "./pages/subjects/create";
 import SubjectsShow from "./pages/subjects/show";
+
 import Dashboard from "./pages/dashboard";
 
 import { dataProvider } from "../src/providers/data.ts";
+
+//4:15:40 to be implemented as Classes route 3 components
 import ClassesList from "./pages/classes/list";
 import ClassesCreate from "./pages/classes/create";
 import ClassesShow from "./pages/classes/show";
+
 import { authProvider } from "../src/providers/auth.ts";
 import { Login } from "./pages/login";
 import { Register } from "./pages/register";
@@ -110,16 +115,18 @@ function App() {
                 //     icon: <ClipboardCheck />,
                 //   },
                 // },
-                // {
-                //   name: "classes",
-                //   list: "/classes",
-                //   create: "/classes/create",
-                //   show: "/classes/show/:id",
-                //   meta: {
-                //     label: "Classes",
-                //     icon: <GraduationCap />,
-                //   },
-                // },
+
+                  //4:14:38 we need to define class routes and use these component within App.tsx
+                {
+                  name: "classes",
+                  list: "/classes",
+                  create: "/classes/create",
+                  show: "/classes/show/:id",
+                  meta: {
+                    label: "Classes",
+                    icon: <GraduationCap />,
+                  },
+                },
               ]}
             >
               <Routes>
@@ -180,11 +187,14 @@ function App() {
                   {/*  <Route path="confirm" element={<EnrollmentConfirm />} />*/}
                   {/*</Route>*/}
 
-                  {/*<Route path="classes">*/}
-                  {/*  <Route index element={<ClassesList />} />*/}
-                  {/*  <Route path="create" element={<ClassesCreate />} />*/}
-                  {/*  <Route path="show/:id" element={<ClassesShow />} />*/}
-                  {/*</Route>*/}
+
+                  {/*add classes as a new route 4:15:05 inside the refine component
+                      this route will render the classes/list + the classes/create*/}
+                  <Route path="classes">
+                    <Route index element={<ClassesList />} />
+                    <Route path="create" element={<ClassesCreate />} />
+                    <Route path="show/:id" element={<ClassesShow />} />
+                  </Route>
                 </Route>
               </Routes>
 

@@ -4,8 +4,10 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
+
+//4:25:10 brinf all the imports needed to create a form
 import {
-  Form,
+  Form, //to be used within JSX
   FormControl,
   FormField,
   FormItem,
@@ -31,33 +33,47 @@ import UploadWidget from "@/components/upload-widget";
 import { Subject, User } from "@/types";
 import z from "zod";
 
-const ClassesCreate = () => {
-  const back = useBack();
+// 4:14:26 src/pages/classes/create.tsx
+//                     responsible for rendering a form through which we re gonna create a new class
+//4:18:36 begin with the dev
 
-  const form = useForm({
-    resolver: zodResolver(classSchema),
-    refineCoreProps: {
+const ClassesCreate = () => {
+
+  const back = useBack(); //4:19:35
+
+    //4:23:26  define the form
+    //4:23:12 define the form itself by importing the zod resolver
+    //use form coming from react-hook-form
+  const form = useForm({ //4:23:30
+    resolver: zodResolver(classSchema), //define the resolver that is resolving in a clasSchema
+                                    // - which has been created at the schema.ts
+    refineCoreProps: { //4:23:54 will let refine now exactly wt we re gonna do with
+                        // that form and it will handle the rest
       resource: "classes",
       action: "create",
     },
-    defaultValues: {
+    defaultValues: { //define the default values 4:23:45
       status: "active",
     },
   });
 
-  const {
+  const { //4:26:53 extraction of fields to be used in JSX
+      //we hve to have access to fields - by destructuring them from the form
     refineCore: { onFinish },
     handleSubmit,
-    formState: { isSubmitting, errors },
+    formState: { isSubmitting, errors }, //we hve to have access to form errors - by destructuring them from the form state 4:44:30
     control,
   } = form;
 
+  //4:41:25 define the bannerPublicId whis is gonna be used in the field value of the Cloudinary Upload Widget
   const bannerPublicId = form.watch("bannerCldPubId");
 
+  //4:24:13 onsubmit func definition
   const onSubmit = async (values: z.infer<typeof classSchema>) => {
     try {
+        console.log(values); //4:25:07
       await onFinish(values);
-    } catch (error) {
+    } catch (error) { //4:24:55
       console.error("Error creating class:", error);
     }
   };
@@ -91,57 +107,86 @@ const ClassesCreate = () => {
   const subjects = subjectsQuery.data?.data || [];
   const subjectsLoading = subjectsQuery.isLoading;
 
-  return (
+  return ( //4:18:35
     <CreateView className="class-view">
-      <Breadcrumb />
+      <Breadcrumb  //refine UI
+        />
 
       <h1 className="page-title">Create a Class</h1>
       <div className="intro-row">
         <p>Provide the required information below to add a class.</p>
-        <Button onClick={() => back()}>Go Back</Button>
+
+          <Button //4:19:20 use of useBack hook to work coming from Refine-CORE
+                    onClick={() => back()}>Go Back</Button>
       </div>
 
-      <Separator />
+      <Separator  //4:20:48
+        />
 
-      <div className="my-4 flex items-center">
+      <div  //the card form  UI begins now - render the card component
+            className="my-4 flex items-center">
         <Card className="class-form-card">
-          <CardHeader className="relative z-10">
-            <CardTitle className="text-2xl pb-0 font-bold text-gradient-orange">
+          <CardHeader //4:21:25
+              className="relative z-10">
+            <CardTitle
+                    className="text-2xl pb-0 font-bold text-gradient-orange">
               Fill out form
             </CardTitle>
           </CardHeader>
 
           <Separator />
 
-          <CardContent className="mt-7">
-            <Form {...form}>
-              <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
-                <FormField
+          <CardContent  //4:22:00
+                className="mt-7">
+            <Form  //4:22:17 Render a classic React Hook form   - shadcn cmd+k (form): anatomy of a form
+                    // import a z from zod
+                    // define a form schema
+                    {...form} //we spread out the form information
+            >
+              <form //will contain several FIELDS :
+                        // banner(using the cloudinary widget),
+                        // name
+                        // subjects
+                        // Teachers , capacuty, status, Description
+                    onSubmit={handleSubmit(onSubmit)} //4:25:35
+                    className="space-y-5">
+
+
+
+                <FormField //4:39:39 field for uploading
                   control={control}
                   name="bannerUrl"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>
+                      <FormLabel  //4:26:09 banner image is needed
+                        >
                         Banner Image <span className="text-orange-600">*</span>
                       </FormLabel>
                       <FormControl>
-                        <UploadWidget
+
+                          {/*4:38:50 create the **upload widget component***/}
+                          {/*- src/components/upload-widget.tsx*/}
+                          {/*and import this component within src/pages/classes/create.tsx*/}
+                        <UploadWidget //4:39:27 4:41:00
                           value={
                             field.value
-                              ? {
+                              ? { //if that exists ?
                                   url: field.value,
                                   publicId: bannerPublicId ?? "",
                                 }
                               : null
                           }
-                          onChange={(file) => {
-                            if (file) {
-                              field.onChange(file.url);
-                              form.setValue("bannerCldPubId", file.publicId, {
-                                shouldValidate: true,
-                                shouldDirty: true,
+                          onChange={(file) => {    //4:41:45     accepts a file
+                            if (file) { //4:42:06 if a file exists
+                              field.onChange(file.url); //we ll call the field.onChange and pass in the url of that file
+                                    //then  use the form to set a value 4:42:50
+                              form.setValue("bannerCldPubId", //here we re modifying the banner.. with the file
+                                  file.publicId,
+                                  { //additional options 4:43:00
+                                shouldValidate: true, //rerun zod validation after we submit it
+                                shouldDirty: true, //mark the forma s modified as soon as the image is uploaded
                               });
-                            } else {
+                            } else { //if a file doesnt exists
                               field.onChange("");
                               form.setValue("bannerCldPubId", "", {
                                 shouldValidate: true,
@@ -151,7 +196,8 @@ const ClassesCreate = () => {
                           }}
                         />
                       </FormControl>
-                      <FormMessage />
+                      <FormMessage  //4:43:42  we hve to have access to form errors - by destructuring them from the form state
+                         />
                       {errors.bannerCldPubId && !errors.bannerUrl && (
                         <p className="text-destructive text-sm">
                           {errors.bannerCldPubId.message?.toString()}
@@ -162,15 +208,16 @@ const ClassesCreate = () => {
                 />
 
                 <FormField
-                  control={control}
-                  name="name"
+                  control={control} //4:27:15
+                  name="name" //4:27:20
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>
+                      <FormLabel //required 4:27:35
+                        >
                         Class Name <span className="text-orange-600">*</span>
                       </FormLabel>
                       <FormControl>
-                        <Input
+                        <Input //4:27:39
                           placeholder="Introduction to Biology - Section A"
                           {...field}
                         />
@@ -180,8 +227,9 @@ const ClassesCreate = () => {
                   )}
                 />
 
-                <div className="grid sm:grid-cols-2 gap-4">
-                  <FormField
+                <div //4:28:10 2 fields will fit into a single row -subject and teachers
+                        className="grid sm:grid-cols-2 gap-4">
+                  <FormField //Subjects form field
                     control={control}
                     name="subjectId"
                     render={({ field }) => (
@@ -189,21 +237,28 @@ const ClassesCreate = () => {
                         <FormLabel>
                           Subject <span className="text-orange-600">*</span>
                         </FormLabel>
-                        <Select
+                        <Select //4:28:53
                           onValueChange={(value) =>
-                            field.onChange(Number(value))
+                            field.onChange(Number(value)) //convert he value into a number before passing it
                           }
-                          value={field.value?.toString()}
+                          value={field.value?.toString()} //so we can properly display it
                           disabled={subjectsLoading}
                         >
                           <FormControl>
-                            <SelectTrigger className="w-full">
-                              <SelectValue placeholder="Select a subject" />
+                                {/*4:28:42 instead of rendering an input we will render a select component */}
+                            <SelectTrigger  //4:29:34
+                                    className="w-full">
+                              <SelectValue
+                                        placeholder="Select a subject" />
                             </SelectTrigger>
                           </FormControl>
-                          <SelectContent>
+                          <SelectContent //4:30:15 we ll fetch the real values by querying the data from the BE
+                              //4:30:25 at the beginning we will generate some fake values using junie /prompt
+                              //junie will add the mock data file @ the constants/index.ts 4:31:23
+                              //4:32:12 we can map over those subjects
+                            >
                             {subjects.map((subject) => (
-                              <SelectItem
+                              <SelectItem //for each return this component
                                 key={subject.id}
                                 value={subject.id.toString()}
                               >
@@ -217,7 +272,7 @@ const ClassesCreate = () => {
                     )}
                   />
 
-                  <FormField
+                  <FormField //4:33:20 Teachers form field
                     control={control}
                     name="teacherId"
                     render={({ field }) => (
@@ -249,8 +304,9 @@ const ClassesCreate = () => {
                   />
                 </div>
 
-                <div className="grid sm:grid-cols-2 gap-4">
-                  <FormField
+                <div //2 fields will fit into a single row -capacity and status
+                        className="grid sm:grid-cols-2 gap-4">
+                  <FormField //capacity
                     control={control}
                     name="capacity"
                     render={({ field }) => (
