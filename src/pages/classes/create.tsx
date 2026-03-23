@@ -1,4 +1,4 @@
-import { useForm } from "@refinedev/react-hook-form";
+import { useForm } from "@refinedev/react-hook-form"; //5:03:30 COderaabit fix
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -176,7 +176,7 @@ const ClassesCreate = () => {
                                 }
                               : null
                           }
-                          onChange={(file) => {    //4:41:45     accepts a file
+                          onChange={(file) => {    //4:41:45     accepts a file 5:04:40 coderabbit fix
                             if (file) { //4:42:06 if a file exists
                               field.onChange(file.url); //we ll call the field.onChange and pass in the url of that file
                                     //then  use the form to set a value 4:42:50

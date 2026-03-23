@@ -3,6 +3,7 @@ import { createDataProvider, CreateDataProviderOptions } from "@refinedev/rest";
 //#    3:50:20 src/providers/data.ts =?implement a new rest data provider
 import { CreateResponse, GetOneResponse, ListResponse } from "@/types";
 import { BACKEND_BASE_URL } from "@/constants";
+import {HttpError} from "@refinedev/core";
 
 
 
@@ -10,6 +11,32 @@ import { BACKEND_BASE_URL } from "@/constants";
 if(!BACKEND_BASE_URL){
   throw new Error("BE is not configured, Please set the VITE_BACKEND_BASE_URL in ur .env file")
 }
+
+
+// 5:37:40 display the errors on the FE side
+// webstormproject/classroom-frontend/src/providers/data.ts
+// create a new func forming the error object 5:38:05
+//so we can use it when we map the responses
+const buildHttpError = async(response:Response):Promise<HttpError> => {
+  //it returns a Promise which results in an HttpError defined at type.ts
+  let message = 'Request failed.';
+  try{ //get access to the payload 5:38:50
+      const payload = (await response.json()) as { message: string };
+      if(payload?.message) message = payload.message;
+
+  }catch{
+    //ignore errors
+  }
+
+  return {
+    message,
+    statusCode:response.status
+  }
+
+}
+
+
+
 //1st define the options needed 3:50:35
 const options: CreateDataProviderOptions = {
   getList: { //define the option specifically fpr get list
@@ -70,6 +97,9 @@ const options: CreateDataProviderOptions = {
 
     //3:51:32
     mapResponse: async (response) => {
+      //use of func created above 5:39:35
+      if(!response.ok) throw await buildHttpError(response);
+
       //4:00:20 Code rabbit fix : adding .clone()
       const payload: ListResponse = await response.clone().json(); //get access to the payload we re passing over
 
@@ -79,6 +109,9 @@ const options: CreateDataProviderOptions = {
 
     //3:52:00
     getTotalCount: async (response) => {
+      //use of func created above 5:39:35
+      if(!response.ok) throw await buildHttpError(response);
+
       const payload: ListResponse = await response.json();
       return payload.pagination?.total ?? payload.data?.length ?? 0;
     },
