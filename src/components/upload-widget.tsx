@@ -1,7 +1,7 @@
 import { CLOUDINARY_CLOUD_NAME, CLOUDINARY_UPLOAD_PRESET } from "@/constants";
 import { Trash, UploadCloud } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
-import { Button } from "../../../../../jsm-files/classroom-main/src/components/ui/button.tsx";
+import { Button } from "./ui/button.tsx";
 import { UploadWidgetProps, UploadWidgetValue } from "@/types";
 
 //- Dive into the 4:44:55 UPLOAD WIDGET

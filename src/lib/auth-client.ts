@@ -1,5 +1,5 @@
 import { createAuthClient } from "better-auth/react";
-import { BACKEND_BASE_URL, USER_ROLES } from "../../../../../jsm-files/classroom-main/src/constants";
+import { BACKEND_BASE_URL, USER_ROLES } from "../constants";
 
 export const authClient = createAuthClient({
   baseURL: `${BACKEND_BASE_URL}auth`,

@@ -9,9 +9,9 @@ import routerProvider, {
 } from "@refinedev/react-router";
 import { BrowserRouter, Outlet, Route, Routes } from "react-router";
 import "./App.css";
-import { Toaster } from "../../../../jsm-files/classroom-main/src/components/refine-ui/notification/toaster.tsx";
-import { useNotificationProvider } from "../../../../jsm-files/classroom-main/src/components/refine-ui/notification/use-notification-provider.tsx";
-import { ThemeProvider } from "../../../../jsm-files/classroom-main/src/components/refine-ui/theme/theme-provider.tsx";
+import { Toaster } from "../src/components/refine-ui/notification/toaster.tsx";
+import { useNotificationProvider } from "../src/components/refine-ui/notification/use-notification-provider.tsx";
+import { ThemeProvider } from "../src/components/refine-ui/theme/theme-provider.tsx";
 import {
   BookOpen,
   Building2,
@@ -22,7 +22,7 @@ import {
 } from "lucide-react";
 
 import SubjectsList from "./pages/subjects/list";
-import { Layout } from "../../../../jsm-files/classroom-main/src/components/refine-ui/layout/layout.tsx";
+import { Layout } from "./components/refine-ui/layout/layout.tsx";
 import SubjectsCreate from "./pages/subjects/create";
 import SubjectsShow from "./pages/subjects/show";
 
