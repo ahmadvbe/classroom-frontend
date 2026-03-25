@@ -39,6 +39,8 @@ const buildHttpError = async(response:Response):Promise<HttpError> => {
 
 //1st define the options needed 3:50:35
 const options: CreateDataProviderOptions = {
+  //             ==>getList Endpoint
+//        ==>now we hve enabled the getList Functionalities within our RestAPI Data Providers
   getList: { //define the option specifically fpr get list
     //we ll create different endpoints that we can call
     //then refine will handle it in a way allowing us not to change antg within our app 3:52:45
@@ -117,14 +119,20 @@ const options: CreateDataProviderOptions = {
     },
   },
 
+//# 6:19:00 **to Bind the Post Creation Events** we have to modify the data Provider of Refine
+//     to tell it how to call APIs and what data should it expect
+//     webstormproject/classroom-frontend/src/providers/data.ts
+//             ==>create Endpoint 6:19:29
+//        ==>now we hve enabled the create Functionalities within our RestAPI Data Providers
   create: {
-    getEndpoint: ({ resource }) => resource,
+    getEndpoint: ({ resource }) => resource, //get back the resource
 
-    buildBodyParams: async ({ variables }) => variables,
+    buildBodyParams: async ({ variables }) => variables, //6:19:37  takes in the variables and returns them
 
+    //6:19:47 map out the responses
     mapResponse: async (response) => {
-      const json: CreateResponse = await response.json();
-      return json.data ?? {};
+      const json: CreateResponse = await response.json(); //get acces to the json of a type  CreateResponse
+      return json.data ?? {}; //once we get it we can simply return
     },
   },
 
