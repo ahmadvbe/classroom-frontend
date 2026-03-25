@@ -1,4 +1,4 @@
-import { useForm } from "@refinedev/react-hook-form";
+import { useForm } from "@refinedev/react-hook-form"; //5:03:30 COderaabit fix
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -57,9 +57,15 @@ const ClassesCreate = () => {
     },
   });
 
+
+
+    // back to webstormproject/classroom-frontend/src/pages/classes/create.tsx
+    //     access to it by direclty taking it out from the Form (useFrom coming from Refine)
   const { //4:26:53 extraction of fields to be used in JSX
-      //we hve to have access to fields - by destructuring them from the form
-    refineCore: { onFinish },
+      //we hve to have access to fields - by destructuring them from the form create using the useForm coming from Refine
+    refineCore: { onFinish },//call the Refine On Finish Function** to pass the values to the API and create a class 6:20:25
+                    //when the form is finished 6:20:40
+                    //use of it within the onSubmit
     handleSubmit,
     formState: { isSubmitting, errors }, //we hve to have access to form errors - by destructuring them from the form state 4:44:30
     control,
@@ -71,25 +77,29 @@ const ClassesCreate = () => {
   //4:24:13 onsubmit func definition
   const onSubmit = async (values: z.infer<typeof classSchema>) => {
     try {
-        console.log(values); //4:25:07
-      await onFinish(values);
+       // console.log(values); //4:25:07
+      await onFinish(values); //call the onFinsih extracted from the refineCore 6:20:40 and pass in all the values
     } catch (error) { //4:24:55
       console.error("Error creating class:", error);
     }
   };
 
+  //REAL DATA FETCHING FROM THE BE
   // Fetch subjects list
-  const { query: subjectsQuery } = useList<Subject>({
+    //# FRONT END : COLLECTING THE DATA 6:15:40
+    //     REPLACE THE DUMMY DATA WITH THE REAL DATA COMING IN
+    //         drop down field within our create form
+  const { query: subjectsQuery } = useList<Subject>({ //useList coming from RefineDevCore -- Fetch the Subject type
     resource: "subjects",
     pagination: {
       pageSize: 100,
     },
   });
 
-  // Fetch teachers list
-  const { query: teachersQuery } = useList<User>({
+  // Fetch teachers list 6:16:35
+  const { query: teachersQuery } = useList<User>({ //FETCH THE USER TYPE
     resource: "users",
-    filters: [
+    filters: [ //filter with refine
       {
         field: "role",
         operator: "eq",
@@ -101,11 +111,14 @@ const ClassesCreate = () => {
     },
   });
 
+  //access the data from the Actual Queries 6:17:13
   const teachers = teachersQuery.data?.data || [];
-  const teachersLoading = teachersQuery.isLoading;
+  const teachersLoading = teachersQuery.isLoading; //state creation whether they re loading
 
   const subjects = subjectsQuery.data?.data || [];
-  const subjectsLoading = subjectsQuery.isLoading;
+  const subjectsLoading = subjectsQuery.isLoading; //state creation whether they re loading
+    //==>select fieds withih jsx 6:18:00
+    //and map over the data coming from BE 6:18:30
 
   return ( //4:18:35
     <CreateView className="class-view">
@@ -176,7 +189,7 @@ const ClassesCreate = () => {
                                 }
                               : null
                           }
-                          onChange={(file) => {    //4:41:45     accepts a file
+                          onChange={(file) => {    //4:41:45     accepts a file 5:04:40 coderabbit fix
                             if (file) { //4:42:06 if a file exists
                               field.onChange(file.url); //we ll call the field.onChange and pass in the url of that file
                                     //then  use the form to set a value 4:42:50
@@ -242,7 +255,7 @@ const ClassesCreate = () => {
                             field.onChange(Number(value)) //convert he value into a number before passing it
                           }
                           value={field.value?.toString()} //so we can properly display it
-                          disabled={subjectsLoading}
+                          disabled={subjectsLoading} //apply a disabled state 6:18:10 at the start the Subject field is diabled
                         >
                           <FormControl>
                                 {/*4:28:42 instead of rendering an input we will render a select component */}
@@ -283,7 +296,7 @@ const ClassesCreate = () => {
                         <Select
                           onValueChange={field.onChange}
                           value={field.value?.toString()}
-                          disabled={teachersLoading}
+                          disabled={teachersLoading}//apply a disabled state 6:18:10 at the start the teacher field is disabled
                         >
                           <FormControl>
                             <SelectTrigger className="w-full">
