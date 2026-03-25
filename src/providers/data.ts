@@ -147,6 +147,9 @@ const options: CreateDataProviderOptions = {
 };
 
 //3:50:53 create  a new Data provider
-const { dataProvider } = createDataProvider('http://localhost:8000/api/', options);
+const { dataProvider } = createDataProvider(
+    //'http://localhost:8000/api/',
+    BACKEND_BASE_URL,//this is to be changed
+    options);
 
 export { dataProvider };
