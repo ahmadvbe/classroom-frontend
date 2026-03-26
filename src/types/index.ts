@@ -97,7 +97,7 @@ export type Department = {
   description: string;
 };
 
-export type ClassDetails = {
+export type ClassDetails = { //7:03:03
   id: number;
   name: string;
   description: string;
