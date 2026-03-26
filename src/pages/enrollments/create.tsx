@@ -26,7 +26,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import type { ClassDetails, User } from "@/types";
-
+//7:28:00 Refine AI Website Implementation
 const enrollSchema = z.object({
   classId: z.coerce.number().min(1, "Class is required"),
 });

@@ -55,8 +55,8 @@ function App() {
           <DevtoolsProvider>
             <Refine
               dataProvider={dataProvider}
-              // authProvider={authProvider}
-              //notificationProvider={useNotificationProvider()}
+              authProvider={authProvider}
+              notificationProvider={useNotificationProvider()}
               routerProvider={routerProvider}
               options={{
                 syncWithLocation: true,
@@ -87,34 +87,35 @@ function App() {
                     icon: <BookOpen />, //coming from lucid react
                   },
                 },
-                // {
-                //   name: "departments",
-                //   list: "/departments",
-                //   show: "/departments/show/:id",
-                //   create: "/departments/create",
-                //   meta: {
-                //     label: "Departments",
-                //     icon: <Building2 />,
-                //   },
-                // },
-                // {
-                //   name: "users",
-                //   list: "/faculty",
-                //   show: "/faculty/show/:id",
-                //   meta: {
-                //     label: "Faculty",
-                //     icon: <Users />,
-                //   },
-                // },
-                // {
-                //   name: "enrollments",
-                //   list: "/enrollments/create",
-                //   create: "/enrollments/create",
-                //   meta: {
-                //     label: "Enrollments",
-                //     icon: <ClipboardCheck />,
-                //   },
-                // },
+                //7:28:00 Refine AI Website Implementation
+                {
+                  name: "departments",
+                  list: "/departments",
+                  show: "/departments/show/:id",
+                  create: "/departments/create",
+                  meta: {
+                    label: "Departments",
+                    icon: <Building2 />,
+                  },
+                },
+                { //this is the resource for users
+                  name: "users",
+                  list: "/faculty",
+                  show: "/faculty/show/:id",
+                  meta: {
+                    label: "Faculty",
+                    icon: <Users />,
+                  },
+                },
+                {
+                  name: "enrollments",
+                  list: "/enrollments/create",
+                  create: "/enrollments/create",
+                  meta: {
+                    label: "Enrollments",
+                    icon: <ClipboardCheck />,
+                  },
+                },
 
                   //4:14:38 we need to define class routes and use these component within App.tsx
                 {
@@ -134,16 +135,17 @@ function App() {
               ]}
             >
               <Routes>
-                {/*<Route*/}
-                {/*  element={*/}
-                {/*    <Authenticated key="public-routes" fallback={<Outlet />}>*/}
-                {/*      <NavigateToResource fallbackTo="/" />*/}
-                {/*    </Authenticated>*/}
-                {/*  }*/}
-                {/*>*/}
-                {/*  <Route path="/login" element={<Login />} />*/}
-                {/*  <Route path="/register" element={<Register />} />*/}
-                {/*</Route>*/}
+                {/*//7:28:00 Refine AI Website Implementation*/}
+                <Route
+                  element={
+                    <Authenticated key="public-routes" fallback={<Outlet />}>
+                      <NavigateToResource fallbackTo="/" />
+                    </Authenticated>
+                  }
+                >
+                  <Route path="/login" element={<Login />} />
+                  <Route path="/register" element={<Register />} />
+                </Route>
 
                 <Route  //2:08:40
                   element={
@@ -174,22 +176,25 @@ function App() {
                           element={<SubjectsShow />} />
                   </Route>
 
-                  {/*<Route path="departments">*/}
-                  {/*  <Route index element={<DepartmentsList />} />*/}
-                  {/*  <Route path="create" element={<DepartmentsCreate />} />*/}
-                  {/*  <Route path="show/:id" element={<DepartmentShow />} />*/}
-                  {/*</Route>*/}
+                  {/*//7:28:00 Refine AI Website Implementation*/}
+                  <Route path="departments">
+                    <Route index element={<DepartmentsList />} />
+                    <Route path="create" element={<DepartmentsCreate />} />
+                    <Route path="show/:id" element={<DepartmentShow />} />
+                  </Route>
 
-                  {/*<Route path="faculty">*/}
-                  {/*  <Route index element={<FacultyList />} />*/}
-                  {/*  <Route path="show/:id" element={<FacultyShow />} />*/}
-                  {/*</Route>*/}
+                  <Route //this is the route for users
+                       //create process is missing 7:34:30
+                        path="faculty">
+                    <Route index element={<FacultyList />} />
+                    <Route path="show/:id" element={<FacultyShow />} />
+                  </Route>
 
-                  {/*<Route path="enrollments">*/}
-                  {/*  <Route path="create" element={<EnrollmentsCreate />} />*/}
-                  {/*  <Route path="join" element={<EnrollmentsJoin />} />*/}
-                  {/*  <Route path="confirm" element={<EnrollmentConfirm />} />*/}
-                  {/*</Route>*/}
+                  <Route path="enrollments">
+                    <Route path="create" element={<EnrollmentsCreate />} />
+                    <Route path="join" element={<EnrollmentsJoin />} />
+                    <Route path="confirm" element={<EnrollmentConfirm />} />
+                  </Route>
 
 
                   {/*add classes as a new route 4:15:05 inside the refine component
@@ -203,7 +208,7 @@ function App() {
                 </Route>
               </Routes>
 
-              {/*<Toaster />*/}
+              <Toaster />
               <RefineKbar />
               <UnsavedChangesNotifier />
               <DocumentTitleHandler />

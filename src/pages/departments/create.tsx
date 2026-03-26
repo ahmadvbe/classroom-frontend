@@ -18,7 +18,7 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-
+//7:28:00 Refine AI Website Implementation
 const departmentSchema = z.object({
   code: z.string().min(2, "Department code must be at least 2 characters"),
   name: z.string().min(3, "Department name must be at least 3 characters"),
@@ -26,7 +26,7 @@ const departmentSchema = z.object({
     .string()
     .min(5, "Department description must be at least 5 characters"),
 });
-
+//7:38:24 AI refine
 type DepartmentFormValues = z.infer<typeof departmentSchema>;
 
 const DepartmentsCreate = () => {

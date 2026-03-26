@@ -15,7 +15,8 @@ import {
   ShowViewHeader,
 } from "@/components/refine-ui/views/show-view";
 import type { Department } from "@/types";
-
+//7:28:00 Refine AI Website Implementation
+//7:38:24 AI refine
 type DepartmentDetails = {
   department: Department;
   totals: {
@@ -399,7 +400,9 @@ const DepartmentShow = () => {
           <Badge variant="secondary">{details.totals.subjects}</Badge>
         </CardHeader>
         <CardContent>
-          <DataTable table={subjectsTable} paginationVariant="simple" />
+          <DataTable table={subjectsTable}
+                     //paginationVariant="simple"
+          />
         </CardContent>
       </Card>
 
@@ -409,7 +412,9 @@ const DepartmentShow = () => {
           <Badge variant="secondary">{details.totals.classes}</Badge>
         </CardHeader>
         <CardContent>
-          <DataTable table={classesTable} paginationVariant="simple" />
+          <DataTable table={classesTable}
+                     //paginationVariant="simple"
+          />
         </CardContent>
       </Card>
 
@@ -419,7 +424,10 @@ const DepartmentShow = () => {
             <CardTitle>Teachers</CardTitle>
           </CardHeader>
           <CardContent>
-            <DataTable table={teachersTable} paginationVariant="simple" />
+            <DataTable
+                  table={teachersTable}
+                  //paginationVariant="simple"
+            />
           </CardContent>
         </Card>
 
@@ -428,7 +436,10 @@ const DepartmentShow = () => {
             <CardTitle>Students</CardTitle>
           </CardHeader>
           <CardContent>
-            <DataTable table={studentsTable} paginationVariant="simple" />
+            <DataTable
+                  table={studentsTable}
+                  //paginationVariant="simple"
+            />
           </CardContent>
         </Card>
       </div>

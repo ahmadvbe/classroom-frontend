@@ -14,7 +14,7 @@ import {
   ShowViewHeader,
 } from "@/components/refine-ui/views/show-view";
 import type { User } from "@/types";
-
+//7:28:00 Refine AI Website Implementation
 type FacultyDepartment = {
   id: number;
   name: string;
@@ -234,7 +234,10 @@ const FacultyShow = () => {
             <p className="text-sm text-muted-foreground">
               Departments tied to {user.name} based on classes and enrollments.
             </p>
-            <DataTable table={departmentsTable} paginationVariant="simple" />
+            <DataTable
+                  table={departmentsTable}
+                  //paginationVariant="simple"
+            />
           </CardContent>
         </Card>
 
@@ -246,7 +249,9 @@ const FacultyShow = () => {
             <p className="text-sm text-muted-foreground">
               Subjects associated with {user.name} in this term.
             </p>
-            <DataTable table={subjectsTable} paginationVariant="simple" />
+            <DataTable table={subjectsTable}
+                      // paginationVariant="simple"
+            />
           </CardContent>
         </Card>
       </div>

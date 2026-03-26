@@ -12,13 +12,14 @@ import { Breadcrumb } from "@/components/refine-ui/layout/breadcrumb";
 import { DataTable } from "@/components/refine-ui/data-table/data-table";
 import { ShowButton } from "@/components/refine-ui/buttons/show";
 import type { User } from "@/types";
-
+//7:28:00 Refine AI Website Implementation
 const FacultyList = () => {
   const [searchParams] = useSearchParams();
   const [searchQuery, setSearchQuery] = useState(
     searchParams.get("search") ?? ""
   );
 
+  //7:33:00 this is the users page
   const facultyColumns = useMemo<ColumnDef<User>[]>(
     () => [
       {
@@ -74,6 +75,8 @@ const FacultyList = () => {
     ],
     []
   );
+
+  //add role filter and search to users list 7:33:02
 
   const searchFilters = searchQuery
     ? [

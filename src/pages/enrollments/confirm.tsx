@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { ShowView } from "@/components/refine-ui/views/show-view";
-
+//7:28:00 Refine AI Website Implementation
 type EnrollmentDetails = {
   id: number;
   class?: {

@@ -45,6 +45,9 @@ type SubjectUser = {
   image?: string | null;
 };
 
+
+//7:43:00 REFINE AI - Subjects management
+
 const SubjectsShow = () => {
   const Link = useLink();
   const { id } = useParams();
@@ -296,7 +299,9 @@ const SubjectsShow = () => {
           <Badge variant="secondary">{details.totals.classes}</Badge>
         </CardHeader>
         <CardContent>
-          <DataTable table={classesTable} paginationVariant="simple" />
+          <DataTable table={classesTable}
+                      // paginationVariant="simple"
+          />
         </CardContent>
       </Card>
 
@@ -306,7 +311,10 @@ const SubjectsShow = () => {
             <CardTitle>Teachers</CardTitle>
           </CardHeader>
           <CardContent>
-            <DataTable table={teachersTable} paginationVariant="simple" />
+            <DataTable
+                  table={teachersTable}
+                  // paginationVariant="simple"
+            />
           </CardContent>
         </Card>
 
@@ -315,7 +323,9 @@ const SubjectsShow = () => {
             <CardTitle>Students</CardTitle>
           </CardHeader>
           <CardContent>
-            <DataTable table={studentsTable} paginationVariant="simple" />
+            <DataTable table={studentsTable}
+                       // paginationVariant="simple"
+            />
           </CardContent>
         </Card>
       </div>

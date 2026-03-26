@@ -10,7 +10,7 @@ import { Breadcrumb } from "@/components/refine-ui/layout/breadcrumb";
 import { DataTable } from "@/components/refine-ui/data-table/data-table";
 import { ShowButton } from "@/components/refine-ui/buttons/show";
 import { CreateButton } from "@/components/refine-ui/buttons/create";
-
+//7:28:00 Refine AI Website Implementation
 type DepartmentListItem = {
   id: number;
   name: string;
@@ -18,7 +18,7 @@ type DepartmentListItem = {
   description?: string | null;
   totalSubjects?: number | null;
 };
-
+//7:38:24 AI refine
 const DepartmentsList = () => {
   const [searchQuery, setSearchQuery] = useState("");
 

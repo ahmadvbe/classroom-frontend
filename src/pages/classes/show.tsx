@@ -276,9 +276,11 @@ const ClassesShow = () => {
         <CardHeader className="flex flex-row items-center justify-between">
           <CardTitle>Enrolled Students</CardTitle>
         </CardHeader>
-        {/*<CardContent>*/}
-        {/*  <DataTable table={studentsTable} paginationVariant="simple" />*/}
-        {/*</CardContent>*/}
+        <CardContent>
+          <DataTable table={studentsTable}
+                      //paginationVariant="simple"
+          />
+        </CardContent>
       </Card>
     </ShowView>
   );

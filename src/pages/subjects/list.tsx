@@ -25,6 +25,7 @@ const SubjectListPage = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedDepartment, setSelectedDepartment] = useState<string>("all");
 
+  //7:43:00 REFINE AI - Subjects management
   const subjectColumns = useMemo<ColumnDef<Subject>[]>(
     () => [
       {

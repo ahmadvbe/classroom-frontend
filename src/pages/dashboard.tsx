@@ -26,6 +26,8 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import type { Department, Subject, User } from "@/types";
 
+
+//7:28:00 Refine AI Website Implementation
 type ClassListItem = {
   id: number;
   name: string;

@@ -26,7 +26,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import type { Department } from "@/types";
-
+//7:43:00 REFINE AI - Subjects management
 const subjectCreateSchema = z.object({
   departmentId: z.coerce
     .number({
