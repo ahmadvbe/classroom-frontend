@@ -121,6 +121,10 @@ function App() {
                   name: "classes",
                   list: "/classes",
                   create: "/classes/create",
+
+                  //                **Define this App route with the webstormproject/classroom-frontend/src/App.tsx**
+                  //                     add to the classes resource: the show parameter
+                  //                     and point it to: "/classes/show/:id", 6:50:30
                   show: "/classes/show/:id",
                   meta: {
                     label: "Classes",
@@ -193,6 +197,7 @@ function App() {
                   <Route path="classes">
                     <Route index element={<ClassesList />} />
                     <Route path="create" element={<ClassesCreate />} />
+                          {/*add the show/:id route below the classes folder 6:50:35  */}
                     <Route path="show/:id" element={<ClassesShow />} />
                   </Route>
                 </Route>

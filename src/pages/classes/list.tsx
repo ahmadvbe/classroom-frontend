@@ -140,12 +140,17 @@ const ClassesList = () => {
           return <span className="text-foreground">{capacity}</span>;
         },
       },
-      {
+
+
+//       6:51:00 Add the option to go to the class details page from the classes list page
+// @webstormproject/classroom-frontend/src/pages/classes/list.tsx
+        //     we ll add one column to the defined previous columns with id of details
+       {
         id: "details",
         size: 140,
         header: () => <p className="column-title">Details</p>,
-        cell: ({ row }) => (
-          <ShowButton
+        cell: ({ row }) => ( //cells getting access to the value of the row 6:51:36
+          <ShowButton //automatic return of a show button =>whihc has some built in redirection capabilities
             resource="classes"
             recordItemId={row.original.id}
             variant="outline"

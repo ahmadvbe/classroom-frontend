@@ -136,11 +136,16 @@ const options: CreateDataProviderOptions = {
     },
   },
 
-  getOne: {
-    getEndpoint: ({ resource, id }) => `${resource}/${id}`,
 
-    mapResponse: async (response) => {
-      const json: GetOneResponse = await response.json();
+//#                            - we ll have to define the dnpoint that proccesses the request on our behalf @
+//                                     webstormproject/classroom-frontend/src/providers/data.ts
+//                                 and provide us with the right data on that page 6:52:50 it will be the **getOne** endpoint
+  getOne: { //gets the details of one resource
+    getEndpoint: ({ resource, id }) => `${resource}/${id}`,
+          //gets access to resource as well as the id of the resource 6:53:10
+
+    mapResponse: async (response) => { //6:53:23 async func getting access to the response
+      const json: GetOneResponse = await response.json(); //gets access to the json info of the response
       return json.data ?? {};
     },
   },
