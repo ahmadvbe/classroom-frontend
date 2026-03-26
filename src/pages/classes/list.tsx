@@ -4,7 +4,18 @@ import { ColumnDef } from "@tanstack/react-table";
 import { useTable } from "@refinedev/react-table";
 import { useList } from "@refinedev/core";
 
+//    6:42:00 **1 Backend is done
+//        webstormproject/classroom-backend/src/routes/classes.ts 6:40:55
+//         Switch to the FE 6:42:00 where we hve to develop the
+//         webstormproject/classroom-frontend/src/pages/classes/list.tsx 6:42:09
 //src/pages/classes/list.tsx =>will render a list of all the classes
+
+//    **2 Switch to the FE 6:42:00 where we hve to develop the
+//         webstormproject/classroom-frontend/src/pages/classes/list.tsx 6
+//             same as subjects/lists : webstormproject/classroom-frontend/src/pages/subjects/list.tsx
+//         6:42:38 Junie EAP
+//                     webstormproject/Prompt: Classes List Page | Frontend .md
+//             webstormproject/classroom-frontend/src/pages/classes/list.tsx 6:43:20
 import {
   Select,
   SelectContent,
@@ -37,10 +48,12 @@ type ClassListItem = {
 };
 
 const ClassesList = () => {
-  const [searchQuery, setSearchQuery] = useState("");
-  const [selectedSubject, setSelectedSubject] = useState<string>("all");
-  const [selectedTeacher, setSelectedTeacher] = useState<string>("all");
+  const [searchQuery, setSearchQuery] = useState(""); //1-search query for searching
+  const [selectedSubject, setSelectedSubject] = useState<string>("all"); //1-1 and 2 filters,
+  const [selectedTeacher, setSelectedTeacher] = useState<string>("all"); //1-1 and 2 filters,  6:43:25
+  //next 6:43:30 we hve to make request below to get both the subject and the teacher so we can properly filter the options
 
+  //5-Defining the columns for the banner url, the name , status, subjects, capacity
   const classColumns = useMemo<ColumnDef<ClassListItem>[]>(
     () => [
       {
@@ -146,13 +159,14 @@ const ClassesList = () => {
     []
   );
 
+  //2-6:43:30 we hve to make request to get both the subject and the teacher so we can properly filter the options
   const { query: subjectsQuery } = useList<Subject>({
     resource: "subjects",
     pagination: {
       pageSize: 100,
     },
   });
-
+  //2-6:43:30 we hve to make request to get both the subject and the teacher
   const { query: teachersQuery } = useList<User>({
     resource: "users",
     filters: [
@@ -167,9 +181,11 @@ const ClassesList = () => {
     },
   });
 
+  //3-we get the data from the requests above
   const subjects = subjectsQuery.data?.data || [];
   const teachers = teachersQuery.data?.data || [];
 
+  //4-Filters Application 6:43:33 RH and we start defining the columns
   const subjectFilters =
     selectedSubject === "all"
       ? []
@@ -202,6 +218,7 @@ const ClassesList = () => {
       ]
     : [];
 
+  //6- Pass all of the Defined columns into the table 6:43:45
   const classesTable = useTable<ClassListItem>({
     columns: classColumns,
     refineCoreProps: {
@@ -225,6 +242,7 @@ const ClassesList = () => {
     },
   });
 
+  //7-Dispalying Process is amde here  6:43:46
   return (
     <ListView>
       <Breadcrumb />
