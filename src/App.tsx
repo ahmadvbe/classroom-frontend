@@ -38,6 +38,7 @@ import ClassesShow from "./pages/classes/show";
 import { authProvider } from "../src/providers/auth.ts";
 import { Login } from "./pages/login";
 import { Register } from "./pages/register";
+import { Forgotpassword } from "./pages/forgot-password";
 import DepartmentsList from "./pages/departments/list";
 import DepartmentsCreate from "./pages/departments/create";
 import DepartmentShow from "./pages/departments/show";
@@ -145,6 +146,7 @@ function App() {
                 >
                   <Route path="/login" element={<Login />} />
                   <Route path="/register" element={<Register />} />
+                  <Route path="/forgot-password" element={<Forgotpassword />} />
                 </Route>
 
                 <Route  //2:08:40
